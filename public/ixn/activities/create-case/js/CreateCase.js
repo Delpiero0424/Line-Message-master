@@ -107,8 +107,9 @@ define( function( require ) {
 	};
 	
 	//リクエスト送信
-	var result = request(options, function (error, response, body) {
+	request(options, function (error, response, body) {
 	  //コールバックで色々な処理
+
 	});
 	alert(options);
 	alert(result);
