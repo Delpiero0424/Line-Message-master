@@ -13,6 +13,7 @@ define( function( require ) {
 	var scenarioID;
 	var Request = require('../../../../node_modules/request/request');
 	var Fuel = require('../../../../node_modules/fuel/lib/fuel');
+	var Extend = require('../../../../node_modules/require/node_modules/std/');
 	
     $(window).ready(onRender);
 
