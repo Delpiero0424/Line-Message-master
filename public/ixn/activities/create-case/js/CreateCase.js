@@ -13,7 +13,7 @@ define( function( require ) {
 	var scenarioID;
 	var Request = require('../../../../node_modules/request/request');
 	var Fuel = require('../../../../node_modules/fuel/lib/fuel');
-	//var Extend = require('../../../../node_modules/require/node_modules/std/extend');
+	var Extend = require('../../../../node_modules/require/node_modules/std/extend');
 	
     $(window).ready(onRender);
 
@@ -101,7 +101,7 @@ define( function( require ) {
 	//オプションを定義
 	var options = {
 	  url: 'https://master.laborot.com/api/push?uid=' + uid + '&cenarioid=22&test=1',
-	  method: 'POST',
+	  method: 'GET',
 	  headers: headers,
 	  json: true,
 	  form: {"hoge":"fuga"}
@@ -118,8 +118,8 @@ define( function( require ) {
 　　// DEからデータを取得するファンクション
 　　// 引数：ContactID
 　　// 戻り値：UID
-    function getDataFromDE() {
-	 var uid = '';
+    function getDataFromDE(id) {
+	 var uid = id;
 	 var sid = '22';
 	 var authOptions = {
 		'clientId': '5u6fn7eblat6hpucl3v63miz',
@@ -130,6 +130,45 @@ define( function( require ) {
 	 alert(uid);
          return uid;
     };
+   // 追加
+   function testJSONValueReplacer (testId, value, replacer, replacedValue) {
+	tape('test ' + testId, function (t) {
+    	var testUrl = '/' + testId
+    	s.on(testUrl, server.createPostJSONValidator(replacedValue, 'application/json'))
+    	var opts = {
+      		method: 'PUT',
+      		uri: s.url + testUrl,
+      		json: true,
+      		jsonReplacer: replacer,
+      		body: value
+    	}
+    	request(opts, function (err, resp, body) {
+      		t.equal(err, null)
+      		t.equal(resp.statusCode, 200)
+      		t.deepEqual(body, replacedValue)
+      		t.end()
+    		})
+  	})
+    }
+    // 追加
+    function testJSONValue (testId, value) {
+  	tape('test ' + testId, function (t) {
+    		var testUrl = '/' + testId
+    		s.on(testUrl, server.createPostJSONValidator(value, 'application/json'))
+    		var opts = {
+      			method: 'PUT',
+      			uri: s.url + testUrl,
+      			json: true,
+      			body: value
+    			}
+    		request(opts, function (err, resp, body) {
+      			t.equal(err, null)
+      			t.equal(resp.statusCode, 200)
+      			t.deepEqual(body, value)
+      			t.end()
+    			})
+  		})
+    }
 
     function gotoStep(step) {
         $('.step').hide();
@@ -147,7 +186,7 @@ define( function( require ) {
                 break;
             case 3: // Only 2 steps, so the equivalent of 'done' - send off the payload
                 save();
-		fireRequest();
+		//fireRequest();
                 break;
         }
     };
