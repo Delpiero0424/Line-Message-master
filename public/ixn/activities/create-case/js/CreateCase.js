@@ -11,8 +11,8 @@ define( function( require ) {
 	var endpoints;
 	// シナリオID用変数追加
 	var scenarioID;
-	var Request = require('../../../node_modules/request/request');
-	var Fuel = require('../../../node_modules/fuel/lib/fuel');
+	var Request = require('../../../../node_modules/request/request');
+	var Fuel = require('../../../../node_modules/fuel/lib/fuel');
 	
     $(window).ready(onRender);
 
