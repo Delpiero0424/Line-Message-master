@@ -1,0 +1,61 @@
+{
+    "workflowApiVersion": "1.0",
+    "metaData": {
+        "version": "2.0",
+        "icon": "images/jb-icon.jpg",
+        "iconSmall": "images/jb-icon.jpg"
+    },
+    "type": "REST",
+    "lang": {
+        "en-US": {
+            "name": "LINEメッセージ送信",
+            "description": "Activity for creating a case via Desk.com API."
+        }
+    },
+    "arguments": {
+        "execute": {       
+			"inArguments":[
+				{ "firstName":"{{Contact.Attribute.__your-de-name__.FirstName}}"},
+				{ "lastName":"{{Contact.Attribute.__your-de-name__.LastName}}"},
+				{ "emailAddress": "{{Contact.Default.Email}}"}							
+			],
+            "outArguments": [
+            	{ "caseID":"number" }
+			],			
+			"url": "https://test-66.herokuapp.com/ixn/activities/create-case/execute/",
+            "verb": "POST",
+            "body": "",
+            "header": "",
+            "format": "json",
+            "useJwt": false,
+            "timeout": 10000
+        }
+    },
+    "configurationArguments": {
+    	"applicationExtensionKey": "6c225efe-4b7c-4b12-9ff9-196e5f0acd1b",
+        "defaults": { "priority": "4"},             
+        "save": {
+        	"url": "https://test-66.herokuapp.com/ixn/activities/create-case/save/",
+            "body": "",
+            "verb": "POST",
+            "useJwt": false
+        },
+        "publish": {
+        	"url": "https://test-66.herokuapp.com/ixn/activities/create-case/publish/",
+            "verb": "POST",
+            "body": "",
+            "useJwt": false
+        },
+        "validate": {
+        	"url": "https://test-66.herokuapp.com/ixn/activities/create-case/validate/",
+            "verb": "POST",
+            "body": "",
+            "useJwt": false            
+        }
+    },
+    "edit": {
+    	"url": "https://test-66.herokuapp.com/ixn/activities/create-case/",
+        "height": 400,
+        "width": 500
+    }
+}
