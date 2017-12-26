@@ -13,6 +13,7 @@ var activityUtils    = require('./routes/activityUtils');
 var pkgjson = require( './package.json' );
 // Add fuel
 var fuel = require('fuel');
+var extend = require('extend');
 
 var app = express();
 
